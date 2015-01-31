@@ -44,8 +44,7 @@ public class Builder {
 	public Date FormataDataVenda(String dataSemFormatacao) {
 		Date dataFormatada = new Date();
 		try {
-			dataFormatada = new SimpleDateFormat("dd/mm/yyyy")
-					.parse(dataSemFormatacao);
+			dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(dataSemFormatacao);
 
 		} catch (Exception e) {
 			System.out.println("Houve um problema ao formatar a data");
