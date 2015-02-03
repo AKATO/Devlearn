@@ -4,38 +4,34 @@ import static br.com.akato.comissaovenda.EnumPerfil.CORRETOR;
 import static br.com.akato.comissaovenda.EnumPerfil.CORRETORA;
 import static br.com.akato.comissaovenda.EnumPerfil.GERENTE;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Funcionario {
-	private List<Venda> vendas;
+	private Map<Venda,Double> comissoes;
 	private EnumPerfil perfil;
 
 	
 	public Funcionario(String perfil){
 		 this.perfil = identificaPerfil(perfil);
-		 this.vendas = new ArrayList<Venda>();
+		 this.comissoes = new HashMap<Venda, Double>();
 		 }
-	
-	public Funcionario() {
-		this.vendas = new ArrayList<Venda>();
-	}
 
+	public Funcionario(){
+		
+	};
 	public EnumPerfil getPerfil() {
 		return perfil;
 	}
-
-	public void setPerfil(EnumPerfil perfil) {
-		this.perfil = perfil;
+	
+	public void adicionaCommisao(Venda venda, Double comissao){
+		this.comissoes.put(venda, comissao);
 	}
-
-//	 public Funcionario(Double valor,String dataVenda,String perfil){
-//	 this.perfil = identificaPerfil(perfil);
-//	 this.venda = new Venda(valor,dataVenda);
-//	 }
 	
+	public Double getComissaoPorVenda(Venda venda){
+		return this.comissoes.get(venda);
+	}
 	
-
 	private EnumPerfil identificaPerfil(String perfil) {
 		if (perfil.equalsIgnoreCase("gerente")) {
 			return GERENTE;
@@ -45,17 +41,4 @@ public class Funcionario {
 			return CORRETOR;
 		}
 	}
-
-	public List<Venda> getVendas() {
-		return vendas;
-	}
-
-	public void setVendas(List<Venda> vendas) {
-		this.vendas = vendas;
-	}
-	
-	public void addVenda(Venda venda){
-		this.vendas.add(venda);
-	}
-	
 }

@@ -1,8 +1,8 @@
 package br.com.akato.comissaovenda;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class Venda {
 	private double valorVenda;
@@ -16,10 +16,6 @@ public class Venda {
 		return valorVenda;
 	}
 
-	public void setValorVenda(double valorVenda) {
-		this.valorVenda = valorVenda;
-	}
-
 	public Venda(double valor, String string) {
 		this.valorVenda = valor;
 		this.dataVenda = FormataDataVenda(string);
@@ -28,11 +24,13 @@ public class Venda {
 	public Venda() {
 	}
 
-	public boolean pertenceAoAno(String ano) {
-		Date dataLimite = this.FormataDataVenda("31/12/" + ano);
-		return this.dataVenda.getTime() <= dataLimite.getTime();
+	public int getAnoDeVenda(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.dataVenda.getTime());
+		int ano = cal.get(Calendar.YEAR);
+		return ano;
 	}
-
+	
 	private Date FormataDataVenda(String dataSemFormatacao) {
 		Date dataFormatada = new Date();
 		try {
@@ -45,10 +43,37 @@ public class Venda {
 		return dataFormatada;
 	}
 
-	public boolean vendaFoiFeitaEm2014() {
-		if (this.getDataVenda().getYear() <= 2014) {
-			return true;
-		}
-		return false;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dataVenda == null) ? 0 : dataVenda.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(valorVenda);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Venda other = (Venda) obj;
+		if (dataVenda == null) {
+			if (other.dataVenda != null)
+				return false;
+		} else if (!dataVenda.equals(other.dataVenda))
+			return false;
+		if (Double.doubleToLongBits(valorVenda) != Double
+				.doubleToLongBits(other.valorVenda))
+			return false;
+		return true;
+	}
+	
+	
 }

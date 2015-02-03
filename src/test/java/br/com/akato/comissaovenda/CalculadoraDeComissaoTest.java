@@ -7,10 +7,6 @@ import org.junit.Test;
 
 public class CalculadoraDeComissaoTest extends Builder{
 	
-	CalculadoraDeComissao calculadora;
-	Venda venda;
-	Funcionario funcionario;
-	
 	@Before
 	public void criaCalculadora(){
 		calculadora = new CalculadoraDeComissao();
@@ -21,108 +17,100 @@ public class CalculadoraDeComissaoTest extends Builder{
 	@Test
 	public void verificaComissaoDeCorretorComVendaDe2014ComMaisDe60Dias(){
 		criaVendaComValorEm2014ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretor());
-		Assert.assertEquals(valorComissao, 90000.0*0.02);
+		criaFuncionarioCorretor();
+		calculadora.calcularComissaoPorVenda(venda,funcionario );
+		Assert.assertEquals("A venda do Corretor nao foi comissionada corretamente", 90000.0*0.02, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretorComVendaDe2014ComMenosDe60Dias(){
+		criaCalculadora();
 		criaVendaComValorEm2014ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretor());
-		Assert.assertEquals(valorComissao, 0.0);
+		criaFuncionarioCorretor();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Corretor nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
+		
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretorComVendaDe2015ComMaisDe60Dias(){
 		criaVendaComValorEm2015ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretor());
-		Assert.assertEquals(valorComissao, 90000.0*0.03);
+		criaFuncionarioCorretor();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Corretor nao foi comissionada corretamente", 90000.0*0.03, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretorComVendaDe2015ComMenosDe60Dias(){
 		criaVendaComValorEm2015ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretor());
-		Assert.assertEquals(valorComissao, 0.0);
+		criaFuncionarioCorretor();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Corretor nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretoraComVendaDe2014ComMaisDe60Dias(){
 		criaVendaComValorEm2014ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretora());
-		Assert.assertEquals(valorComissao, 90000.0*0.05);	
+		criaFuncionarioCorretora();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda da Corretora nao foi comissionada corretamente", 90000.0*0.05, funcionario.getComissaoPorVenda(venda));
+
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretoraComVendaDe2014ComMenosDe60Dias(){
 		criaVendaComValorEm2014ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretora());
-		Assert.assertEquals(valorComissao, 0.0);	
+		criaFuncionarioCorretora();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda da corretora nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretoraComVendaDe2015ComMaisDe60Dias(){
 		criaVendaComValorEm2015ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretora());
-		Assert.assertEquals(valorComissao, 90000.0*0.04);	
+		criaFuncionarioCorretora();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda da Corretora nao foi comissionada corretamente", 90000.0*0.04, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeCorretoraComVendaDe2015ComMenosDe60Dias(){
 		criaVendaComValorEm2015ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioCorretora());
-		Assert.assertEquals(valorComissao, 0.0);	
+		criaFuncionarioCorretora();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda da corretora nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeGerenteComVendaDe2014ComMaisDe60Dias(){
 		criaVendaComValorEm2014ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioGerente());
-		Assert.assertEquals(valorComissao, 90000.0*0.03);	
+		criaFuncionarioGerente();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Gerente nao foi commissionada corretamente", 90000.0*0.03, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeGerenteComVendaDe2014ComMenosDe60Dias(){
 		criaVendaComValorEm2014ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioGerente());
-		Assert.assertEquals(valorComissao, 0.0);	
+		criaFuncionarioGerente();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Gerente nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeGerenteComVendaDe2015ComMaisDe60Dias(){
 		criaVendaComValorEm2015ComMaisDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioGerente());
-		Assert.assertEquals(valorComissao, 90000.0*0.03);	
+		criaFuncionarioGerente();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Gerente nao foi commissionada corretamente", 90000.0*0.03, funcionario.getComissaoPorVenda(venda));
 	}
 	
 	@Test
 	public void verificaComissaoDeGerenteComVendaDe2015ComMenosDe60Dias(){
 		criaVendaComValorEm2015ComMenosDe60Dias();
-		double valorComissao = calculadora.calcularComissaoPorVenda(venda,criaFuncionarioGerente());
-		Assert.assertEquals(valorComissao, 0.0);
+		criaFuncionarioGerente();
+		calculadora.calcularComissaoPorVenda(venda,funcionario);
+		Assert.assertEquals("A venda do Gerente nao deveria ser commissionada", 0.0, funcionario.getComissaoPorVenda(venda));
 	}
-	
-	public void criaVendaComValorEm2015ComMaisDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2015");
-		calculadora.setDataDoCalculo(FormataDataVenda("01/04/2015"));
-	}
-	
-	public void criaVendaComValorEm2015ComMenosDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2015");
-		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2015"));
-	}
-	
-	public void criaVendaComValorEm2014ComMaisDe60Dias(){
-		venda = new Venda(90000.0,"02/02/2014");
-		calculadora.setDataDoCalculo(FormataDataVenda("05/05/2014"));
-	}
-	
-	public void criaVendaComValorEm2014ComMenosDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2014");
-		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2014"));
-	}
-	
-	
-	
 	
 }

@@ -17,11 +17,14 @@ public class CalculadoraDeComissao {
 			if(verificaSePoderaReceberComissao(venda)){
 				if(venda!=null && venda.getValorVenda()>0){
 					
-					double valorComissao = funcionario.getPerfil().comissao(venda.pertenceAoAno("2014"));
+					double valorComissao = funcionario.getPerfil().comissaoDoAno(venda.getAnoDeVenda());
 					double valorVenda = venda.getValorVenda();
 					comissao = valorComissao * valorVenda;
+					
 				}
 			}
+			
+			funcionario.adicionaCommisao(venda, comissao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

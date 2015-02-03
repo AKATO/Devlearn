@@ -4,20 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Builder {
-	protected Funcionario criaFuncionarioCorretor(){
-		Funcionario corretor = new Funcionario("corretor");
-		return corretor;
-	}
 	
-	protected Funcionario criaFuncionarioCorretora(){
-		Funcionario corretora = new Funcionario("corretora");
-		return corretora;
-	}	
-	
-	protected Funcionario criaFuncionarioGerente(){
-		Funcionario gerente = new Funcionario("gerente");
-		return gerente;
-	}
+	CalculadoraDeComissao calculadora;
+	Venda venda;
+	Funcionario funcionario;
 	
 	protected Venda criaVendaComValorEm2014(double valor, String data){
 		Venda venda = new Venda(valor, data);
@@ -31,14 +21,9 @@ public class Builder {
 	}
 	
 	
-	
 	public Funcionario criaFuncionario(String perfilFuncionario){
 		Funcionario funcionario = new Funcionario(perfilFuncionario);
 		return funcionario;
-	}
-	
-	public void adicionaVenda(Funcionario funcionario, double valorVenda, String data){
-		funcionario.addVenda(new Venda(valorVenda,data));
 	}
 	
 	public Date FormataDataVenda(String dataSemFormatacao) {
@@ -50,6 +35,40 @@ public class Builder {
 			System.out.println("Houve um problema ao formatar a data");
 		}
 		return dataFormatada;
+	}
+	
+	
+	
+	public void criaVendaComValorEm2015ComMaisDe60Dias(){
+		venda = new Venda(90000.0,"01/01/2015");
+		calculadora.setDataDoCalculo(FormataDataVenda("01/04/2015"));
+	}
+	
+	public void criaVendaComValorEm2015ComMenosDe60Dias(){
+		venda = new Venda(90000.0,"01/01/2015");
+		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2015"));
+	}
+	
+	public void criaVendaComValorEm2014ComMaisDe60Dias(){
+		venda = new Venda(90000.0,"02/02/2014");
+		calculadora.setDataDoCalculo(FormataDataVenda("05/05/2014"));
+	}
+	
+	public void criaVendaComValorEm2014ComMenosDe60Dias(){
+		venda = new Venda(90000.0,"01/01/2014");
+		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2014"));
+	}
+	
+	public void criaFuncionarioCorretor(){
+		funcionario = new Funcionario("corretor");
+	}
+	
+	public void criaFuncionarioCorretora(){
+		funcionario = new Funcionario("corretora");
+	}	
+	
+	public void criaFuncionarioGerente(){
+		funcionario = new Funcionario("gerente");
 	}
 	
 }
