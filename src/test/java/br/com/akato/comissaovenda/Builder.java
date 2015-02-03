@@ -9,6 +9,13 @@ public class Builder {
 	Venda venda;
 	Funcionario funcionario;
 	
+	public void inicializaObjetos(){
+		calculadora = new CalculadoraDeComissao();
+		venda = new Venda();
+		funcionario = new Funcionario();
+	}
+	
+	
 	protected Venda criaVendaComValorEm2014(double valor, String data){
 		Venda venda = new Venda(valor, data);
 		return venda;

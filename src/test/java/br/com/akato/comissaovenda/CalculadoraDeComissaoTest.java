@@ -9,9 +9,7 @@ public class CalculadoraDeComissaoTest extends Builder{
 	
 	@Before
 	public void criaCalculadora(){
-		calculadora = new CalculadoraDeComissao();
-		venda = new Venda();
-		funcionario = new Funcionario();
+		inicializaObjetos();
 	}
 	
 	@Test
