@@ -12,6 +12,7 @@ public class CalculadoraDeComissaoTest extends Builder{
 		inicializaObjetos();
 	}
 	
+	
 	@Test
 	public void verificaComissaoDeCorretorComVendaDe2014ComMaisDe60Dias(){
 		criaVendaComValorEm2014ComMaisDe60Dias();

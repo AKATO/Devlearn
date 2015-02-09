@@ -9,6 +9,7 @@ public class Builder {
 	Venda venda;
 	Funcionario funcionario;
 	
+	
 	public void inicializaObjetos(){
 		calculadora = new CalculadoraDeComissao();
 		venda = new Venda();
