@@ -3,7 +3,7 @@ package br.com.akato.comissaovenda;
 import java.util.Map;
 import java.util.TreeMap;
 
-public enum EnumPerfil {
+public enum Perfil {
 	CORRETORA(0.05,0.04),
 	GERENTE(0.03,0.03),
 	CORRETOR(0.02,0.03);
