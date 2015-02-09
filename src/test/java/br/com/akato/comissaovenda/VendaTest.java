@@ -22,6 +22,7 @@ public class VendaTest extends Builder{
 
 	}
 	
+	
 	@Test
 	public void verificaSeVendaDoFuncionarioFoiFeitaEm2015(){
 		criaVendaComValorEm2015ComMaisDe60Dias();

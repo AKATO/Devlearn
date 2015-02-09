@@ -1,15 +1,15 @@
 package br.com.akato.comissaovenda;
 
-import static br.com.akato.comissaovenda.EnumPerfil.CORRETOR;
-import static br.com.akato.comissaovenda.EnumPerfil.CORRETORA;
-import static br.com.akato.comissaovenda.EnumPerfil.GERENTE;
+import static br.com.akato.comissaovenda.Perfil.CORRETOR;
+import static br.com.akato.comissaovenda.Perfil.CORRETORA;
+import static br.com.akato.comissaovenda.Perfil.GERENTE;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Funcionario {
 	private Map<Venda,Double> comissoes;
-	private EnumPerfil perfil;
+	private Perfil perfil;
 
 	
 	public Funcionario(String perfil){
@@ -19,8 +19,9 @@ public class Funcionario {
 
 	public Funcionario(){
 		
+		
 	};
-	public EnumPerfil getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 	
@@ -32,7 +33,7 @@ public class Funcionario {
 		return this.comissoes.get(venda);
 	}
 	
-	private EnumPerfil identificaPerfil(String perfil) {
+	private Perfil identificaPerfil(String perfil) {
 		if (perfil.equalsIgnoreCase("gerente")) {
 			return GERENTE;
 		} else if (perfil.equalsIgnoreCase("corretora")) {

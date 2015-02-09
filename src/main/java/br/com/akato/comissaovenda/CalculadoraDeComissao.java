@@ -11,6 +11,7 @@ public class CalculadoraDeComissao {
 		this.dataDoCalculo = new Date(Calendar.getInstance().getTimeInMillis());
 	}
 	
+	
 	public double calcularComissaoPorVenda(Venda venda, Funcionario funcionario){
 		double comissao = 0.0;
 		try {

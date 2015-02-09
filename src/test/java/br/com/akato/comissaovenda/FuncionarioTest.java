@@ -4,7 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import static  br.com.akato.comissaovenda.EnumPerfil.*;
+import static  br.com.akato.comissaovenda.Perfil.*;
 
 
 
@@ -17,6 +17,7 @@ public class FuncionarioTest extends Builder{
 		Assert.assertEquals("A porcentagem do corretor em 2014 deve ser" + CORRETOR.comissaoDoAno(2014), 
 				CORRETOR.comissaoDoAno(2014),funcionario.getPerfil().comissaoDoAno(2014));
 	}
+	
 	
 	@Test
 	public void verificaSeCorretorPossuiVendaComissaoCorretaEm2015(){

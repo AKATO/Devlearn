@@ -16,6 +16,7 @@ public class Venda {
 		return valorVenda;
 	}
 
+	
 	public Venda(double valor, String string) {
 		this.valorVenda = valor;
 		this.dataVenda = FormataDataVenda(string);
