@@ -1,39 +1,44 @@
 package br.com.akato.comissaovenda;
+import static br.com.akato.comissaovenda.Perfil.*;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Builder {
 	
 	CalculadoraDeComissao calculadora;
 	Venda venda;
-	Funcionario funcionario;
+	Funcionario corretor;
+	Funcionario corretora;
+	Funcionario gerente;
 	
-	public void inicializaObjetos(){
-		calculadora = new CalculadoraDeComissao();
-		venda = new Venda();
-		funcionario = new Funcionario();
+	protected void inicializarFuncionarios(){
+		criaFuncionarioCorretor();
+		criaFuncionarioCorretora();
+		criaFuncionarioGerente();
 	}
 	
 	
-	protected Venda criaVendaComValorEm2014(double valor, String data){
+	protected Venda criaVendaComValorEm2014(BigDecimal valor, String data){
 		Venda venda = new Venda(valor, data);
 		return venda;
 	}
 	
 
-	protected Venda criaVendaComValorEm2015(double valor, String data){
+	protected Venda criaVendaComValorEm2015(BigDecimal valor, String data){
 		Venda venda = new Venda(valor, data);
 		return venda;
 	}
 	
 	
-	public Funcionario criaFuncionario(String perfilFuncionario){
+	protected Funcionario criaFuncionario(Perfil perfilFuncionario){
 		Funcionario funcionario = new Funcionario(perfilFuncionario);
 		return funcionario;
 	}
 	
-	public Date FormataDataVenda(String dataSemFormatacao) {
+	protected Date FormataDataVenda(String dataSemFormatacao) {
 		Date dataFormatada = new Date();
 		try {
 			dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(dataSemFormatacao);
@@ -46,36 +51,42 @@ public class Builder {
 	
 	
 	
-	public void criaVendaComValorEm2015ComMaisDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2015");
-		calculadora.setDataDoCalculo(FormataDataVenda("01/04/2015"));
+	protected void criaVendaComValorEm2015ComMaisDe60Dias(){
+		venda = new Venda(new BigDecimal(90000.0),"01/01/2015");
+		calculadora = new CalculadoraDeComissao(FormataDataVenda("01/04/2015"));
 	}
 	
-	public void criaVendaComValorEm2015ComMenosDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2015");
-		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2015"));
+	protected void criaVendaComValorEm2015ComMenosDe60Dias(){
+		venda = new Venda(new BigDecimal(90000.0),"01/01/2015");
+		calculadora = new CalculadoraDeComissao(FormataDataVenda("30/01/2015"));
 	}
 	
-	public void criaVendaComValorEm2014ComMaisDe60Dias(){
-		venda = new Venda(90000.0,"02/02/2014");
-		calculadora.setDataDoCalculo(FormataDataVenda("05/05/2014"));
+	protected void criaVendaComValorEm2014ComMaisDe60Dias(){
+		venda = new Venda(new BigDecimal(90000.0),"02/02/2014");
+		calculadora = new CalculadoraDeComissao(FormataDataVenda("05/05/2014"));
 	}
 	
-	public void criaVendaComValorEm2014ComMenosDe60Dias(){
-		venda = new Venda(90000.0,"01/01/2014");
-		calculadora.setDataDoCalculo(FormataDataVenda("30/01/2014"));
+	protected void criaVendaComValorEm2014ComMenosDe60Dias(){
+		venda = new Venda(new BigDecimal(90000.0),"01/01/2014");
+		calculadora =new CalculadoraDeComissao(FormataDataVenda("30/01/2014"));
 	}
 	
-	public void criaFuncionarioCorretor(){
-		funcionario = new Funcionario("corretor");
+	protected void criaFuncionarioCorretor(){
+		corretor = new Funcionario(CORRETOR);
 	}
 	
-	public void criaFuncionarioCorretora(){
-		funcionario = new Funcionario("corretora");
+	protected void criaFuncionarioCorretora(){
+		corretora = new Funcionario(CORRETORA);
 	}	
 	
-	public void criaFuncionarioGerente(){
-		funcionario = new Funcionario("gerente");
+	protected void criaFuncionarioGerente(){
+		gerente = new Funcionario(GERENTE);
+	}
+	
+	protected int getAnoVenda(Venda venda){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(venda.getDataVenda());
+		return cal.get(Calendar.YEAR);
 	}
 	
 }
