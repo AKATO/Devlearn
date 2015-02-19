@@ -1,42 +1,41 @@
 package br.com.akato.comissaovenda;
 
-import java.util.Calendar;
+
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CalculadoraDeComissao {
 	
 	private Date dataDoCalculo;
 	
-	public CalculadoraDeComissao(){
-		this.dataDoCalculo = new Date(Calendar.getInstance().getTimeInMillis());
+	public CalculadoraDeComissao(Date dataDeCalculo){
+		this.dataDoCalculo = dataDeCalculo;
 	}
 	
-	public double calcularComissaoPorVenda(Venda venda, Funcionario funcionario){
-		double comissao = 0.0;
+	
+	public BigDecimal calcularComissaoPorVenda(Venda venda, Funcionario funcionario){
+		BigDecimal porcentagemComissao = new BigDecimal("0.00");
+		BigDecimal valorVenda = new BigDecimal("0.00");
+		BigDecimal comissaoDaVenda = new BigDecimal("0.00");
 		try {
 			if(verificaSePoderaReceberComissao(venda)){
-				if(venda!=null && venda.getValorVenda()>0){
+				if(venda!=null && venda.getValorVenda().doubleValue()>0.0){
 					
-					double valorComissao = funcionario.getPerfil().comissaoDoAno(venda.getAnoDeVenda());
-					double valorVenda = venda.getValorVenda();
-					comissao = valorComissao * valorVenda;
+					porcentagemComissao = funcionario.getComissaoPorData(venda.getDataVenda());
+					valorVenda = venda.getValorVenda();
+					comissaoDaVenda = porcentagemComissao.multiply(valorVenda);
 					
 				}
 			}
 			
-			funcionario.adicionaCommisao(venda, comissao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return comissao;
+		return comissaoDaVenda;
 	}
 	
 	public Date getDataDoCalculo() {
 		return dataDoCalculo;
-	}
-
-	public void setDataDoCalculo(Date dataDoCalculo) {
-		this.dataDoCalculo = dataDoCalculo;
 	}
 
 	private boolean verificaSePoderaReceberComissao(Venda venda){
