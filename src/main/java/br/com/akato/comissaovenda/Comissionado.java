@@ -4,18 +4,18 @@ package br.com.akato.comissaovenda;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class Comissionado {
 
-	protected Map<Integer, BigDecimal> comissoes;
+	protected Map<Date, BigDecimal> comissoes;
 
-	protected BigDecimal commissaoAno(Date data) {
+	protected BigDecimal commissaoPorData(Date data) {
 
-		return comissoes.get(getAno(data));
+		return comissoes.get(buscaComissao(data));
 	}
 
 	/*
@@ -46,18 +46,25 @@ public abstract class Comissionado {
 	}
 
 	protected void adicionaComissao(Date dataLimite, BigDecimal comissao) {
-		this.comissoes.put(getAno(dataLimite), comissao);
+		this.comissoes.put(dataLimite, comissao);
 	}
 
 	protected BigDecimal getComissaoPorData(Date dataDeReferencia){
-		return this.comissoes.get(getAno(dataDeReferencia));
+		return this.buscaComissao(dataDeReferencia);
 	}
 	
-	protected int getAno(Date data) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
-		int ano = cal.get(Calendar.YEAR);
-		return ano;
+	//lookup by date
+	protected BigDecimal buscaComissao(Date data) {
+		Set<Date> chavesPorData = this.comissoes.keySet();
+		Date dataEncontrada = new Date();
+		boolean encontrouComissao=false;
+		for(Date dataChave:chavesPorData){
+			if(data.getTime()>=dataChave.getTime()){
+				encontrouComissao = true;
+				dataEncontrada = dataChave;
+			} 
+		}
+		return encontrouComissao?this.comissoes.get(dataEncontrada):null;
 	}
 
 }

@@ -1,6 +1,7 @@
 package br.com.akato.comissaovenda;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -10,7 +11,7 @@ public class Funcionario extends Comissionado{
 	
 	public Funcionario(Perfil perfil) {
 		this.perfil = perfil;
-		this.comissoes = new HashMap<Integer,BigDecimal>();
+		this.comissoes = new HashMap<Date,BigDecimal>();
 		this.carregarComissoes(this.perfil);
 	}
 
